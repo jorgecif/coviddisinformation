@@ -6,11 +6,9 @@ import gensim
 from gensim.utils import simple_preprocess
 from gensim.parsing.preprocessing import STOPWORDS, preprocess_string, strip_punctuation, strip_numeric
 from nltk.stem import WordNetLemmatizer, SnowballStemmer
-import nltk
 import tensorflow as tf
 from tensorflow import keras
 
-nltk.download('wordnet')
 max_len = 300
 
 
