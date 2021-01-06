@@ -9,7 +9,6 @@ from nltk.stem import WordNetLemmatizer, SnowballStemmer
 import nltk
 import tensorflow as tf
 from tensorflow import keras
-from keras.preprocessing.sequence import pad_sequences
 
 nltk.download('wordnet')
 max_len = 300
@@ -90,7 +89,7 @@ def aplicar_modelo_unif_2input(in1, in2, modelo_probar, tokenizer):
     corpus_2=pd.Series(corpus_1)
     sequences_reserva = tok.texts_to_sequences(corpus_2.values)
     in2_arr=np.array(in2) # cambio a array para pasar al modelo
-    transform_vect_reserva= pad_sequences(sequences_reserva, maxlen=max_len)
+    transform_vect_reserva= tf.keras.preprocessing.sequence.pad_sequences(sequences_reserva, maxlen=max_len)    
     prediccion=clf.predict({'nlp_input': transform_vect_reserva, 'meta_input': in2_arr})    
     if prediccion > 0.5:
       label= "NO"
