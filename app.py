@@ -41,7 +41,7 @@ original_words = ['caresses', 'flies', 'dies', 'mules', 'denied','died', 'agreed
                 'traditional', 'reference', 'colonizer','plotted']
 singles = [stemmer.stem(plural) for plural in original_words]
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 def get_keys(val,my_dict):
     for key, value in my_dict.items():
