@@ -146,4 +146,4 @@ def clasificar():
     return render_template("index.html", rawtext= rawtext.upper(), prediction_general_topic=prediction_tema_label, label_alerta=label_alerta, prob_alerta=prob_alerta, words_topics=words_topics_lda)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
