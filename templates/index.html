@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 disinformation detector</title>
+
+	 <!-- Font Awesome -->
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+     <!-- Bootstrap core CSS -->
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
+     <!-- Material Design Bootstrap -->
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.3/css/mdb.min.css" rel="stylesheet">    
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="/">COVID-19 Disinformation Detector</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#id1">About</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+    <br/>
+    <br/>
+
+    <div class="jumbotron" style="background:#0686e4;color:#fff">
+        <div class="container">
+          <h2 class="display-3">Detección de desinformación relacionada con COVID-19</h2>
+          <p>Usando técnicas técnicas de aprendizaje automático y procesamiento de lenguaje natural </p>
+          <p>Por: Jorge Orlando Cifuentes Cifuentes: <a href="mailto:jorgecif@gmail.com" style="color:yellow;">jorgecif@gmail.com</a></p>
+          <p><a href="#id1" class="btn btn-success waves-effect btn-lg" href="/" role="button">Iniciar &raquo;</a></p>
+          <img src="/static/images/Logounir.png" class="rounded float-right" alt="Logo" >
+        </div>
+
+
+      </div>
+    <br/>
+
+    <div class="container" >
+        <form method="POST" action="/clasificar">
+        <h4>Noticia</h4>
+        <label for="rawtext">Copiar el titular de la noticia aquí</label>
+        <textarea rows="5" cols="10" type="text" name="rawtext" class="form-control"></textarea>
+            <button type="reset" class="btn btn-primary">Borrar</button>
+            <button type="submit" href="#id1" class="btn btn-primary">Predecir</button>
+            
+        </form>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card mb-12 shadow-sm" id="id1">
+                  <h4>Texto original</h4>
+                  <div class="alert alert-primary" ><p style="color:black">{{ rawtext }}</p></div>
+
+            </div>
+        </div>
+    
+        <div class="col-md-6">
+              <div class="card mb-10 shadow-sm" id="id2">
+                  <h4>Tema general</h4>
+                <div class="alert alert-success" role="alert"><p>{{ prediction_general_topic }}</p></div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card mb-10 shadow-sm" id="id3">
+              <h4>Subtema y palabras clave</h4>
+            <div class="alert alert-success" role="alert"><p>{{ words_topics }}</p></div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card mb-12 shadow-sm" id="id4">
+              <h4>Alerta de contenido con desinformación</h4>
+            <div class="alert alert-danger" role="alert"><p>{{ label_alerta }}</p></div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card mb-12 shadow-sm" id="id5">
+              <h4>Probabilidad de la alerta</h4>
+            <div class="alert alert-danger" role="alert"><p>{{ prob_alerta }}</p></div>
+          </div>
+        </div>
+        
+        
+    </div>
+        <br/>
+      <br/>
+      <br/>
+    </div>
+
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.3/js/mdb.min.js"></script>
+    
+</body>
+
+</html>
