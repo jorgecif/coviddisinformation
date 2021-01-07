@@ -7,7 +7,7 @@ from gensim.utils import simple_preprocess
 from gensim.parsing.preprocessing import STOPWORDS, preprocess_string, strip_punctuation, strip_numeric
 import nltk
 from nltk.stem import WordNetLemmatizer, SnowballStemmer
-nltk.data.path.append('static/nltk_data/wordnet')
+nltk.data.path.append('static/nltk_data/wordnet/')
 
 import tensorflow as tf
 #from tensorflow import keras
