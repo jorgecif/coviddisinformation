@@ -6,7 +6,7 @@ import gensim
 from gensim.utils import simple_preprocess
 from gensim.parsing.preprocessing import STOPWORDS, preprocess_string, strip_punctuation, strip_numeric
 from nltk.stem import WordNetLemmatizer, SnowballStemmer
-#import tensorflow as tf
+import tensorflow as tf
 from tensorflow import keras
 
 max_len = 300
@@ -105,7 +105,6 @@ def clasificar():
         news_tokenizer = open(os.path.join("static/modelos/PrediccionAlerta/tokenizer.pkl"),"rb") 
         news_tk = joblib.load(news_tokenizer)
         model_alert_2input = keras.models.load_model('static/modelos/PrediccionAlerta/modelLSTM_2inputs.h5')
-        #model_alert_1input = tf.keras.models.load_model('static/modelos/PrediccionAlerta/model_base_1input.h5')
   
         # 1. Predicción de la temática general
         vectorized_text=news_cv.transform([rawtext]).toarray()
