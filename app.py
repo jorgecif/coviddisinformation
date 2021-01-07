@@ -6,9 +6,10 @@ import gensim
 from gensim.utils import simple_preprocess
 from gensim.parsing.preprocessing import STOPWORDS, preprocess_string, strip_punctuation, strip_numeric
 from nltk.stem import WordNetLemmatizer, SnowballStemmer
-import tensorflow as tf
-from tensorflow import keras
-
+#import tensorflow as tf
+#from tensorflow import keras
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.models import load_model
 max_len = 300
 
 
@@ -69,7 +70,7 @@ def aplicar_modelo_unif_2input(in1, in2, modelo_probar, tokenizer):
     corpus_2=pd.Series(corpus_1)
     sequences_reserva = tok.texts_to_sequences(corpus_2.values)
     in2_arr=np.array(in2) # cambio a array para pasar al modelo
-    transform_vect_reserva= keras.preprocessing.sequence.pad_sequences(sequences_reserva, maxlen=max_len)    
+    transform_vect_reserva= pad_sequences(sequences_reserva, maxlen=max_len)    
     prediccion=clf.predict({'nlp_input': transform_vect_reserva, 'meta_input': in2_arr})    
     if prediccion > 0.5:
       label= "NO"
@@ -104,7 +105,7 @@ def clasificar():
         # Modelo final de alerta
         news_tokenizer = open(os.path.join("static/modelos/PrediccionAlerta/tokenizer.pkl"),"rb") 
         news_tk = joblib.load(news_tokenizer)
-        model_alert_2input = keras.models.load_model('static/modelos/PrediccionAlerta/modelLSTM_2inputs.h5')
+        model_alert_2input = load_model('static/modelos/PrediccionAlerta/modelLSTM_2inputs.h5')
   
         # 1. Predicción de la temática general
         vectorized_text=news_cv.transform([rawtext]).toarray()
