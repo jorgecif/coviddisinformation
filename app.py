@@ -29,12 +29,12 @@ def get_keys(val,my_dict):
 
 
 # Función para extraer subtemáticas
-def topics_lda(documento): 
+def topics_lda(documento, diccionario, modelo): 
     unseen_document=documento
     # Preprocesamiento
-    bow_vector = lda_dictionay.doc2bow(preprocess(unseen_document))
+    bow_vector = diccionario.doc2bow(preprocess(unseen_document))
     # Aplico modelo
-    prediction_lda=lda_model[bow_vector]
+    prediction_lda=modelo[bow_vector]
 
     probs=[]
     for i in range(0, len(prediction_lda)):
@@ -123,7 +123,7 @@ def clasificar():
             topics_cargados.append(preprocess_string(topic[1], filters))
         
         unseen_document = rawtext
-        pred=topics_lda(unseen_document)
+        pred=topics_lda(unseen_document, lda_dictionay, lda_model)
         words_topics_lda=str(topics_cargados[pred])
         
         # 3. Predicción de alerta con modelo unificado
