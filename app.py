@@ -6,6 +6,8 @@ import gensim
 from gensim.utils import simple_preprocess
 from gensim.parsing.preprocessing import STOPWORDS, preprocess_string, strip_punctuation, strip_numeric
 from nltk.stem import WordNetLemmatizer, SnowballStemmer
+nltk.data.path.append('static/nltk_data/wordnet')
+
 import tensorflow as tf
 #from tensorflow import keras
 from tensorflow.keras.preprocessing.sequence import pad_sequences
