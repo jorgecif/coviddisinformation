@@ -28,7 +28,7 @@ lda_model= joblib.load(lda_model_path)
 # Modelo final de alerta
 news_tokenizer = open(os.path.join("static/modelos/PrediccionAlerta/tokenizer.pkl"),"rb") 
 news_tk = joblib.load(news_tokenizer)
-model_alert_2input = keras.models.load_model('static/modelos/PrediccionAlerta/modelLSTM_2inputs.h5', custom_objects='KerasLayer':hub.KerasLayer})
+model_alert_2input = keras.models.load_model('static/modelos/PrediccionAlerta/modelLSTM_2inputs.h5')
 #model_alert_1input = tf.keras.models.load_model('static/modelos/PrediccionAlerta/model_base_1input.h5')
 
 # Convertir palabras plural en singular
