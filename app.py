@@ -12,25 +12,6 @@ from tensorflow import keras
 max_len = 300
 
 
-# Carga de modelos
-# Modelo clasificación del tema
-news_vectorizer = open(os.path.join("static/modelos/PrediccionTema/Tema_ML_vectorizer.pkl"),"rb")
-news_cv = joblib.load(news_vectorizer)
-news_log_model = open(os.path.join("static/modelos/PrediccionTema/Tema_ML_LOG_model.pkl"),"rb") 
-news_clf = joblib.load(news_log_model)
-
-# Modelo LDA subtema y palabras relacionadas
-lda_dictionay_path = open(os.path.join("static/modelos/PrediccionSubtema/dictionary.pkl"),"rb") 
-lda_model_path = open(os.path.join("static/modelos/PrediccionSubtema/model_LDA.pkl"),"rb") 
-lda_dictionay = joblib.load(lda_dictionay_path)
-lda_model= joblib.load(lda_model_path)
-
-# Modelo final de alerta
-news_tokenizer = open(os.path.join("static/modelos/PrediccionAlerta/tokenizer.pkl"),"rb") 
-news_tk = joblib.load(news_tokenizer)
-model_alert_2input = keras.models.load_model('static/modelos/PrediccionAlerta/modelLSTM_2inputs.h5')
-#model_alert_1input = tf.keras.models.load_model('static/modelos/PrediccionAlerta/model_base_1input.h5')
-
 # Convertir palabras plural en singular
 stemmer = SnowballStemmer("english")
 original_words = ['caresses', 'flies', 'dies', 'mules', 'denied','died', 'agreed', 'owned', 
@@ -107,6 +88,25 @@ def clasificar():
     if request.method == 'POST':
         rawtext = request.form['rawtext']
    
+        # 0. Carga de modelos
+        # Modelo clasificación del tema
+        news_vectorizer = open(os.path.join("static/modelos/PrediccionTema/Tema_ML_vectorizer.pkl"),"rb")
+        news_cv = joblib.load(news_vectorizer)
+        news_log_model = open(os.path.join("static/modelos/PrediccionTema/Tema_ML_LOG_model.pkl"),"rb") 
+        news_clf = joblib.load(news_log_model)
+
+        # Modelo LDA subtema y palabras relacionadas
+        lda_dictionay_path = open(os.path.join("static/modelos/PrediccionSubtema/dictionary.pkl"),"rb") 
+        lda_model_path = open(os.path.join("static/modelos/PrediccionSubtema/model_LDA.pkl"),"rb") 
+        lda_dictionay = joblib.load(lda_dictionay_path)
+        lda_model= joblib.load(lda_model_path)
+
+        # Modelo final de alerta
+        news_tokenizer = open(os.path.join("static/modelos/PrediccionAlerta/tokenizer.pkl"),"rb") 
+        news_tk = joblib.load(news_tokenizer)
+        model_alert_2input = keras.models.load_model('static/modelos/PrediccionAlerta/modelLSTM_2inputs.h5')
+        #model_alert_1input = tf.keras.models.load_model('static/modelos/PrediccionAlerta/model_base_1input.h5')
+  
         # 1. Predicción de la temática general
         vectorized_text=news_cv.transform([rawtext]).toarray()
         prediction_tema_labels = {"Health":0, "Enviroment":1, "Lifestyle":2, "Finance":3, "Sports":4, "Politics":5, "Technology":6, "Science":7}
