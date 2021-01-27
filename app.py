@@ -117,7 +117,7 @@ def clasificar():
 
         # 2. Predicción de subtemática y palabras relacionadas
         # Recuento de palabras de topics
-        num_words=10
+        num_words=5
         lda_topics_cargados = lda_model.show_topics(num_words=num_words)
         topics_cargados = []
         filters = [lambda x: x.lower(), strip_punctuation, strip_numeric]
