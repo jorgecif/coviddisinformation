@@ -75,9 +75,9 @@ def aplicar_modelo_unif_2input(in1, in2, modelo_probar, tokenizer):
     transform_vect_reserva= pad_sequences(sequences_reserva, maxlen=max_len)    
     prediccion=clf.predict({'nlp_input': transform_vect_reserva, 'meta_input': in2_arr})    
     if prediccion > 0.5:
-      label= "NO"
+      label= "SI"
     else:
-      label = "SI"
+      label = "NO"
     alerta=[prediccion,label]
     return alerta
 
@@ -144,7 +144,8 @@ def clasificar():
         in2=input2
         resultado_prediccion_2=aplicar_modelo_unif_2input(in1, in2, model_alert_2input, news_tk)
         label_alerta=resultado_prediccion_2[1]
-        prob_alerta=1-resultado_prediccion_2[0][0]
+        
+        prob_alerta=resultado_prediccion_2[0][0]
     
     return render_template("index.html", rawtext= rawtext.upper(), prediction_general_topic=prediction_tema_label, label_alerta=label_alerta, prob_alerta=prob_alerta, words_topics=words_topics_lda)
 
